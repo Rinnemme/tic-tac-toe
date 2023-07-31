@@ -14,6 +14,25 @@
 <body>
     <div id="container">
         <h1>Tic Tac Toe</h1>
+        <div id="display-message">Pick player names</div>
+        <div id="player-select">
+            <div id="player1" class="player-selector">
+                <label for="player1-name">Player 1's Name</label>
+                <input type="text" name="player1-name" id="player1-name">
+                <label for="player1-mark">Player 1's Mark</label>
+                <select name="player1-mark" id="player1-mark">
+                    <option value="x">x</option>
+                    <option value="o">o</option>
+                </select>
+            </div>
+            <div id="player2" class="player-selector">
+                <label for="player2-name">Player 2's Name</label>
+                <input type="text" name="player2-name" id="player2-name">
+                <label for="bot-player-button">Or, play against a bot</label>
+                <button>Bot player</button>
+            </div>
+        </div>
+        <button id="start-button">Start game</button>
         <div id="board">
         </div>
     </div>
