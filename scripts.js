@@ -29,6 +29,8 @@ const game = (() => {
         game.playerOne = player(playerOneName, playerOneMark)
         game.playerTwo = player(playerTwoName, playerTwoMark)
         game.currentPlayer = (Math.floor(Math.random()*2)===0) ? playerOne : playerTwo
+        document.getElementById("board").style.display = "grid"
+        document.getElementById("starting-ui").style.display = "none"
     }
     document.getElementById("start-button").addEventListener("click",function() {start()})
     return {checkWin, playerOne, playerTwo, currentPlayer}

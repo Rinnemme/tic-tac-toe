@@ -95,7 +95,8 @@ button:active {
     cursor:pointer;
 }
 
-#container {
+#container,
+#starting-ui {
     align-items:center;
     display:flex;
     flex-direction:column;
