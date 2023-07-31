@@ -4,10 +4,6 @@ const Player = (name, mark) => {
     return {name, mark}
 }
 
-const Space = (name, mark) => {
-    return {name, mark}
-}
-
 const board = (() => {
     const boardObjects = []
     for (let i=1; i<=9; i++) {
@@ -28,7 +24,11 @@ const board = (() => {
             declareWinner(player)
         }
     }
-    return{boardObjects, winConditions, checkCondition}
+    const checkWin = () => {
+        winConditions.forEach(condition => 
+            checkCondition(condition))
+    }
+    return{boardObjects, checkWin}
 })()
 
 
