@@ -4,9 +4,9 @@
 }
 
 h1 {
+    font-family: 'Reenie Beanie', cursive;
     font-size:3.8em;
     margin:0;
-    font-family: 'Reenie Beanie', cursive;
 }
 
 body {
@@ -21,25 +21,24 @@ body {
 }
 
 #display-message {
-    font-size:1em;
     background-color:rgb(231, 231, 231);
     color:rgb(0, 0, 0);
-    padding:8px 15px 8px 15px;
+    font-size:1em;
     margin: 20px 0px 20px 0px;
-    transition: .3s ease-in;
+    padding:8px 15px 8px 15px;
 }
 
 #player-select {
-    width:100%;
     display:flex;
     padding: 20px;
+    width:100%;
 }
 
 .player-selector {
-    flex:1;
-    display:flex;
-    flex-direction:column;
     align-items:center;
+    display:flex;
+    flex:1;
+    flex-direction:column;
     justify-content: center;
 }
 
@@ -50,8 +49,8 @@ button   {
 
 button {
     background-color:black;
-    border-radius:2px;
     border:none;
+    border-radius:2px;
     color:white;
     padding:6px 10px 6px 10px;
 }
@@ -69,17 +68,17 @@ button:active {
 .player-selector>input,
 .player-selector>select,
 .player-selector>button {
-    width:50%;
-    margin-top:8px;
-    margin-bottom:15px;
     height:25px;
+    margin-bottom:15px;
+    margin-top:8px;
     text-align:center;
+    width:50%;
 }
 
 .player-selector>button {
     background-color:rgb(231, 231, 231);
-    color:black;
     border:1px solid black;
+    color:black;
     padding:0;
 }
 
@@ -107,6 +106,11 @@ button:active {
     
 }
 
+#start-button {
+    padding: 8px 13px 8px 13px;
+    border-radius:5px;
+}
+
 #board {
     display:none;
     gap:10px;
@@ -117,14 +121,14 @@ button:active {
 }
 
 .space {
-    border:1px solid black;
-    font-family: 'Reenie Beanie', cursive;
-    display:flex;
     align-items:center;
+    border:1px solid black;
     cursor:pointer;
-    justify-content:center;
+    display:flex;
+    font-family: 'Reenie Beanie', cursive;
     font-size:9em;
-    line-height:0px;
     height:100%;
+    justify-content:center;
+    line-height:0px;
     width:100%;
 }

@@ -2,8 +2,6 @@ const player = (name, mark) => {
     return {name,mark}
 }
 
-const makePlayer = player
-
 const game = (() => {
     const gameMessage = document.getElementById('display-message')
     let playerTwoIsBot = false
@@ -19,12 +17,12 @@ const game = (() => {
         playerOne = player(playerOneName, playerOneMark)
         playerTwo = player(playerTwoName, playerTwoMark)
         const decider = Math.floor(Math.random()*2)
-        currentPlayer = (decider===0) ? playerOne : playerTwo
+        currentPlayer = (decider === 0) ? playerOne : playerTwo
         document.getElementById("board").style.display = "grid"
         document.getElementById("starting-ui").style.display = "none"
         gameMessage.textContent = `${currentPlayer.name}'s up first!`
     }
-    document.getElementById("start-button").addEventListener("click",function() {start()})
+    document.getElementById("start-button").addEventListener("click", function() {start()})
 
     const placeMark = (element) => {
         if (gameMessage.textContent === `${currentPlayer.name} wins!`) {return}
@@ -79,7 +77,7 @@ const board = (() => {
     for (let i=1; i<=9; i++) {
         const newSpace = document.createElement("div")
         newSpace.classList.add('space')
-        newSpace.setAttribute("id",`space-${i}`)
+        newSpace.setAttribute("id", `space-${i}`)
         newSpace.addEventListener("click", function() {game.placeMark(this)})
         document.getElementById('board').appendChild(newSpace)
         const newSpaceObject = {
