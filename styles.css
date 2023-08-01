@@ -21,7 +21,7 @@ body {
 }
 
 #display-message {
-    background-color:rgb(231, 231, 231);
+    background-color:rgb(243, 243, 243);
     color:rgb(0, 0, 0);
     font-size:1em;
     margin: 20px 0px 20px 0px;
@@ -76,15 +76,14 @@ button:active {
 }
 
 .player-selector>button {
-    background-color:rgb(231, 231, 231);
+    background-color:rgb(243, 243, 243);
     border:1px solid black;
     color:black;
     padding:0;
 }
 
 .player-selector>button:hover {
-    background-color:rgb(193, 193, 193);
-    color:black;
+    background-color:rgb(226, 226, 226);
     cursor:pointer;
     transition:.2s ease-in;
 }
