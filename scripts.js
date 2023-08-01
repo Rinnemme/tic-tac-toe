@@ -1,4 +1,5 @@
 const gameBoard = document.getElementById('board')
+const gameMessage = document.getElementById('display-message')
 
 const player = (name, mark) => {
     return {name,mark}
@@ -7,20 +8,10 @@ const player = (name, mark) => {
 const makePlayer = player
 
 const game = (() => {
-    const winConditions = [[1,2,3],[4,5,6],[7,8,9],[1,5,9],[3,5,7],[1,4,7],[2,5,8],[3,6,9]]
-    const checkCondition = ([a,b,c]) => {
-        if (board.spaces[a].value === player.mark && board.spaces[b].value === player.mark && board.spaces[c].value === player.mark) {
-            declareWinner(player)
-        }
-    }
-    const checkWin = () => {
-        winConditions.forEach(condition => 
-            checkCondition(condition))
-    }
     let playerTwoIsBot = false
-    let playerOne = {}
-    let playerTwo = {}
-    let currentPlayer = {}
+    let playerOne
+    let playerTwo
+    let currentPlayer
     const start = () => {
         const playerOneName = document.getElementById("player1-name").value
         const playerOneMark = document.getElementById("player1-mark").value
@@ -28,11 +19,26 @@ const game = (() => {
         const playerTwoMark = (playerOneMark === "x") ? "o" : "x"
         game.playerOne = player(playerOneName, playerOneMark)
         game.playerTwo = player(playerTwoName, playerTwoMark)
-        game.currentPlayer = (Math.floor(Math.random()*2)===0) ? playerOne : playerTwo
+        const decider = Math.floor(Math.random()*2)
+        game.currentPlayer = (decider===0) ? game.playerOne : game.playerTwo
         document.getElementById("board").style.display = "grid"
         document.getElementById("starting-ui").style.display = "none"
+        gameMessage.textContent = `${game.currentPlayer.name}'s up first!`
     }
     document.getElementById("start-button").addEventListener("click",function() {start()})
+
+    
+
+    const winConditions = [[1,2,3],[4,5,6],[7,8,9],[1,5,9],[3,5,7],[1,4,7],[2,5,8],[3,6,9]]
+    const checkCondition = ([a,b,c]) => {
+        if (board.spaces[a].value === game.currentPlayer.mark && board.spaces[b].value === game.currentPlayer.mark && board.spaces[c].value === game.currentPlayer.mark) {
+            declareWinner(player)
+        }
+    }
+    const checkWin = () => {
+        winConditions.forEach(condition => 
+            checkCondition(condition))
+    }
     return {checkWin, playerOne, playerTwo, currentPlayer}
 })()
 
