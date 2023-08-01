@@ -118,6 +118,12 @@ button:active {
 
 .space {
     border:1px solid black;
+    font-family: 'Reenie Beanie', cursive;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:9em;
+    line-height:0px;
     height:100%;
     width:100%;
 }
