@@ -45,16 +45,24 @@ const game = (() => {
     document.getElementById("start-button").addEventListener("click", function() {start()})
     
     document.getElementById("bot-button").addEventListener("click", function() {
+        const playerTwoInput = document.getElementById("player2-name")
+        const playerTwoLabel = document.getElementById("player2-label")
         if (!playerTwoIsBot) {
             playerTwoIsBot=true 
             gameMessage.textContent = `Player two will be a bot`
-            document.getElementById("player2-name").value = "The bot"
-            document.getElementById("player2-label").textContent = "Bot's name"
+            playerTwoLabel.textContent = "Bot's name"
+            playerTwoInput.value = "The bot"
+            playerTwoInput.style.backgroundColor = "rgb(243, 243, 243)"
+            playerTwoInput.style.color = "rgb(120, 120, 120)"
+            playerTwoInput.setAttribute('readonly', true)
         } else {
             playerTwoIsBot=false 
             gameMessage.textContent = `Player two will no longer be a bot`
-            document.getElementById("player2-name").value = ""
-            document.getElementById("player2-label").textContent = "Player 2's Name"
+            playerTwoLabel.textContent = "Player 2's Name"
+            playerTwoInput.value = ""
+            playerTwoInput.style.backgroundColor = "rgb(255, 255, 255)"
+            playerTwoInput.style.color = "rgb(120, 120, 120)"
+            playerTwoInput.removeAttribute('readonly')
         }
        
        
