@@ -117,39 +117,38 @@ const bot = (() => {
     const markWinnable = (() => {
         botWinConditions.forEach(condition => {condition.winnable=true})
     })()
+    let turnFinished = false
 
-    const takeTurn = () => {
-        const botMark = game.getValues().playerTwo.mark
-        const playerMark = game.getValues().playerOne.mark
-        let turnFinished = false
+    const filterWinConditions = (playerMark) => {
         botWinConditions.forEach(condition => {
             condition.forEach(option => {
                 if (board.spaces[option].mark === playerMark) {condition.winnable=false}
             })
         })
         botWinConditions = botWinConditions.filter(condition => condition.winnable)
-        console.log(botWinConditions)
-        // Win if bot has two in a row
+    }
+
+    const checkForWinningMove = (botMark) => {
         botWinConditions.forEach(condition => {
             let counter = 0
             condition.forEach(option => {
                 if (board.spaces[option].mark === botMark) {
                     counter += 1
-                    console.log(`counter is ${counter}`)
                 }
             })
             if (counter === 2) {
                 condition.forEach(option => {
                     if (board.spaces[option].mark === "") {
                         if (turnFinished) {return}
-                        game.placeMark(document.getElementById(`space-${option+1}`))
+                        game.placeMark(document.getElementById(`${board.spaces[option].name}`))
                         turnFinished = true
                     }
                 })
             }
-        })            
-        // Block if player has two in a row
-        if (turnFinished) {return}
+        })
+    }
+
+    const blockPlayerWin = (playerMark) => {
         game.winConditions.forEach(condition => {
             let counter = 0
             condition.forEach(option => {
@@ -161,15 +160,16 @@ const bot = (() => {
                 condition.forEach(option => {
                     if (board.spaces[option].mark === "") {
                         if (turnFinished) {return}
-                        game.placeMark(document.getElementById(`space-${option+1}`))
+                        game.placeMark(document.getElementById(`${board.spaces[option].name}`))
                         turnFinished = true
                     }
                 })
             }
         })
-        // Add to an open win condition in which I have one mark down
-        if (!turnFinished) {
-            const oneMarkConditions = []
+    }
+
+    const placeSecondInARow = (botMark) => {
+        const oneMarkConditions = []
             botWinConditions.forEach(condition => {
                 let counter = 0
                 condition.forEach(option => {
@@ -191,29 +191,42 @@ const bot = (() => {
                     }
                 })
             }
-        }
-        // Place a mark in an open, empty win condition
-        if (turnFinished) {return}
+    }
+
+    const placeMarkInEmptyWinCondition = () => {
         if (botWinConditions.length > 0) {
             const pickCondition = Math.floor(Math.random()*botWinConditions.length)
             botWinConditions[pickCondition].forEach(option => {
                 if (board.spaces[option].mark === "") {
                     if (turnFinished) {return}
-                    game.placeMark(document.getElementById(`space-${option+1}`))
+                    game.placeMark(document.getElementById(`${board.spaces[option].name}`))
                     turnFinished=true
                 }
             })
         }
-        // Fill in the board if winning isn't an option
-        if (!turnFinished) {
-            board.spaces.forEach(object => {
-                if (turnFinished) {return}
-                if (object.mark === "") {
+    }
+
+    const fillBoard = () => {
+        board.spaces.forEach(object => {
+            if (turnFinished) {return}
+            if (object.mark === "") {
                 game.placeMark(document.getElementById(`${object.name}`))
-                }
-                turnFinished = true
-            })
-        }
+            }
+            turnFinished = true
+        })
+    }
+
+    const takeTurn = () => {
+        turnFinished = false
+        const botMark = game.getValues().playerTwo.mark
+        const playerMark = game.getValues().playerOne.mark
+        filterWinConditions(playerMark)
+        console.log(botWinConditions)
+        checkForWinningMove(botMark)       
+        if (!turnFinished) {blockPlayerWin(playerMark)}
+        if (!turnFinished) {placeSecondInARow(botMark)}
+        if (!turnFinished) {placeMarkInEmptyWinCondition()}
+        if (!turnFinished) {fillBoard()}
     }
     return {markWinnable, takeTurn}
 })()
