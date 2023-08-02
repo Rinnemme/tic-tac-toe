@@ -39,6 +39,7 @@ const game = (() => {
         document.getElementById("board").style.display = "grid"
         document.getElementById("starting-ui").style.display = "none"
         gameMessage.textContent = `${currentPlayer.name}'s up first!`
+        if (playerTwoIsBot) {bot.getMarkValues()}
         if (playerTwoIsBot && currentPlayer === playerTwo) {bot.takeTurn()}
     }
     document.getElementById("start-button").addEventListener("click", function() {start()})
@@ -118,8 +119,15 @@ const bot = (() => {
         botWinConditions.forEach(condition => {condition.winnable=true})
     })()
     let turnFinished = false
+    let botMark
+    let playerMark
 
-    const filterWinConditions = (playerMark) => {
+    const getMarkValues = () => {
+        botMark = game.getValues().playerTwo.mark
+        playerMark = game.getValues().playerOne.mark
+    }
+
+    const filterWinConditions = () => {
         botWinConditions.forEach(condition => {
             condition.forEach(option => {
                 if (board.spaces[option].mark === playerMark) {condition.winnable=false}
@@ -128,7 +136,7 @@ const bot = (() => {
         botWinConditions = botWinConditions.filter(condition => condition.winnable)
     }
 
-    const checkForWinningMove = (botMark) => {
+    const checkForWinningMove = () => {
         botWinConditions.forEach(condition => {
             let counter = 0
             condition.forEach(option => {
@@ -148,7 +156,7 @@ const bot = (() => {
         })
     }
 
-    const blockPlayerWin = (playerMark) => {
+    const blockPlayerWin = () => {
         game.winConditions.forEach(condition => {
             let counter = 0
             condition.forEach(option => {
@@ -168,7 +176,7 @@ const bot = (() => {
         })
     }
 
-    const placeSecondInARow = (botMark) => {
+    const placeSecondInARow = () => {
         const oneMarkConditions = []
             botWinConditions.forEach(condition => {
                 let counter = 0
@@ -203,7 +211,7 @@ const bot = (() => {
                     turnFinished=true
                 }
             })
-        }
+        } else return
     }
 
     const fillBoard = () => {
@@ -211,8 +219,8 @@ const bot = (() => {
             if (turnFinished) {return}
             if (object.mark === "") {
                 game.placeMark(document.getElementById(`${object.name}`))
+                turnFinished = true
             }
-            turnFinished = true
         })
     }
 
@@ -228,5 +236,5 @@ const bot = (() => {
         if (!turnFinished) {placeMarkInEmptyWinCondition()}
         if (!turnFinished) {fillBoard()}
     }
-    return {markWinnable, takeTurn}
+    return {takeTurn, getMarkValues}
 })()
