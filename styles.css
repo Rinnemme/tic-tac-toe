@@ -77,6 +77,11 @@ button:active {
     width:50%;
 }
 
+.player-selector>input:focus,
+.player-selector>select:focus {
+    outline:1px solid black;
+}
+
 .player-selector>input:read-only {
     background-color:rgb(243, 243, 243);
     color:gray;
