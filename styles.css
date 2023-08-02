@@ -113,13 +113,19 @@ button:active {
     flex-direction:column;
     height:fit-content;
     justify-content: center;
-    width:min(450px,100vmin);
+    width:min(400px,100vmin);
     
 }
 
-#start-button {
+#start-button,
+#restart-button {
     padding: 8px 13px 8px 13px;
     border-radius:5px;
+}
+
+#restart-button {
+    margin-top:20px;
+    visibility:hidden;
 }
 
 #board {
@@ -127,7 +133,7 @@ button:active {
     gap:10px;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
-    height:min(450px,100vmin);
+    height:min(400px,100vmin);
     width:100%;
 }
 

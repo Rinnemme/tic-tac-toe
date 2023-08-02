@@ -65,16 +65,21 @@ const game = (() => {
     })
 
     const winConditions = [[0,1,2],[3,4,5],[6,7,8],[0,4,8],[2,4,6],[0,3,6],[1,4,7],[2,5,8]]
-    const checkCondition = ([a,b,c]) => {
+    
+    const checkWinCondition = ([a,b,c]) => {
         if (board.spaces[a].mark === currentPlayer.mark && board.spaces[b].mark === currentPlayer.mark && board.spaces[c].mark === currentPlayer.mark) {
+            message.style.backgroundColor = "rgb(0, 0, 0)"
+            message.style.color = "rgb(255, 255, 255)"
             message.textContent = `${currentPlayer.name} wins!`
+            document.getElementById("restart-button").style.visibility="visible"
             gameOver = true
             return
         }
     }
+
     const checkWin = () => {
         winConditions.forEach(condition => 
-            checkCondition(condition))
+            checkWinCondition(condition))
     }
 
     const checkStalemate = () => {
@@ -85,7 +90,10 @@ const game = (() => {
             }
         })
         if (fullSpaces === 9) {
+            message.style.backgroundColor = "rgb(0, 0, 0)"
+            message.style.color = "rgb(255, 255, 255)"
             message.textContent = `Looks like it's a stalemate!`
+            document.getElementById("restart-button").style.visibility="visible"
             gameOver = true
         }
     }
