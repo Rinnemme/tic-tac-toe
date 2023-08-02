@@ -52,16 +52,12 @@ const game = (() => {
             gameMessage.textContent = `Player two will be a bot`
             playerTwoLabel.textContent = "Bot's name"
             playerTwoInput.value = "The bot"
-            playerTwoInput.style.backgroundColor = "rgb(243, 243, 243)"
-            playerTwoInput.style.color = "rgb(120, 120, 120)"
             playerTwoInput.setAttribute('readonly', true)
         } else {
             playerTwoIsBot=false 
             gameMessage.textContent = `Player two will no longer be a bot`
             playerTwoLabel.textContent = "Player 2's Name"
             playerTwoInput.value = ""
-            playerTwoInput.style.backgroundColor = "rgb(255, 255, 255)"
-            playerTwoInput.style.color = "rgb(120, 120, 120)"
             playerTwoInput.removeAttribute('readonly')
         }
        

@@ -77,6 +77,11 @@ button:active {
     width:50%;
 }
 
+.player-selector>input:read-only {
+    background-color:rgb(243, 243, 243);
+    color:gray;
+}
+
 .player-selector>button {
     background-color:rgb(243, 243, 243);
     border:1px solid black;
