@@ -241,7 +241,6 @@ const bot = (() => {
         const botMark = game.getValues().playerTwo.mark
         const playerMark = game.getValues().playerOne.mark
         filterWinConditions(playerMark)
-        console.log(botWinConditions)
         checkForWinningMove(botMark)       
         if (!turnFinished) {blockPlayerWin(playerMark)}
         if (!turnFinished) {placeSecondInARow(botMark)}
